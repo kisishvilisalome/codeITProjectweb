@@ -34,7 +34,19 @@ const Todo = () => {
     setTasksArray(toggledArray);
   };
 
+  useEffect(()=> {
+    if (localStorage.getItem("todoTasks") === null) return;
+
+    const dataInStorage = JSON.parse(localStorage.getItem("todoTasks"));
+    if(dataInStorage === null) return;
+    if(dataInStorage.length > 0) setTasksArray(dataInStorage);
+
+    // throw new Error("Couldn't connect to server, try again later")
+  }, []);
+
   useEffect(() => {
+    console.log(tasksArray);
+=======
     if (localStorage.getItem("todoTasks") === null) return;
 
     const dataInStorage = JSON.parse(localStorage.getItem("todoTasks"));
@@ -44,6 +56,7 @@ const Todo = () => {
   }, []);
 
   useEffect(() => {
+
     localStorage.setItem("todoTasks", JSON.stringify(tasksArray));
   }, [tasksArray]);
 
